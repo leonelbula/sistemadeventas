@@ -17,6 +17,11 @@ class ParametrosController{
 		require_once 'views/parametros/datosEmpresa.php';
 		require_once 'views/layout/copy.php';
 	}
+	static public function Parrametros() {
+		$informacion = new Parametros();
+		$detallesEmpresa = $informacion ->MostrarParrametro();
+		return $detallesEmpresa;
+	}
 	public function Guardar() {
 		if($_POST){
 			$nit = isset($_POST['nit']) ? $_POST['nit']:FALSE;

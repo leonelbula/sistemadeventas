@@ -15,6 +15,11 @@ $sql = "SELECT * FROM datos_empresa ";
 $resul = $this->db->query($sql);
 return $resul;
 }
+public function MostrarParametroEmpresa() {
+$sql = "SELECT * FROM parametros ";
+$resul = $this->db->query($sql);
+return $resul;
+}
 public function VerVentaCodigo($codigo) {
 $sql = "SELECT * FROM venta WHERE codigo = $codigo";
 $resul = $this->db->query($sql);
@@ -49,6 +54,12 @@ $dirEmpresa = $valueE['direccion'];
 $ciuEmpresa = $valueE['ciudad'];
 $depEmpresa = $valueE['departamento'];
 $telEmpresa = $valueE['telefono'];
+}
+
+$parametro = $factura->MostrarParametroEmpresa();
+
+foreach ($parametro as $key => $valueP) {
+$resolucion = $valueP['resolucion_dian'];
 }
 
 while ($row = $detalles-> fetch_object()) {
@@ -89,14 +100,14 @@ $bloque1 = <<<EOF
 		
 		<tr>
 			
-			<td style="width:150px">$nomEmpresa</td>
+			<td style="width:150px"><br><br><br>$nomEmpresa</td>
 
 			<td style="background-color:white; width:140px">
 				
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
 					<br>
-					$nitEmpresa
+					Nit: $nitEmpresa
 
 					<br>
 					$dirEmpresa
@@ -110,7 +121,7 @@ $bloque1 = <<<EOF
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
 					<br>
-					$telEmpresa;
+					Telefono: $telEmpresa;
 					
 					<br>
 					$ciuEmpresa - $depEmpresa
@@ -331,7 +342,7 @@ $bloque6 = <<<EOF
 		</tr>
 		<tr>
 		<td style="border: 1px solid #666; background-color:white; width:540px; text-align:center; font-weight: bold">
-			Resolucion DIAN
+			Resolucion DIAN: $resolucion
 		</td>			
 
 		</tr>

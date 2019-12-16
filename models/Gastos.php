@@ -90,5 +90,35 @@ class Gastos{
 		}
 		return $respt;
 	}
+	public function Gastos($fechaInicial,$fechaFinal) {
+		
+		
+		if($fechaInicial == $fechaFinal){
+			
+			$sql = "SELECT SUM(valor) as total FROM gastos WHERE fecha like '%$fechaFinal%'";
+			
+		} else {
+			
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$sql = "SELECT SUM(valor) as total FROM gastos WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno'";
+			} else {
+
+				$sql = "SELECT SUM(valor) as total FROM gastos WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'";
+			}
+		}
+		
+		
+		$resul = $this->db->query($sql);
+		return $resul;
+	}
 }
 

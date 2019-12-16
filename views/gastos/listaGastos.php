@@ -33,7 +33,7 @@
 
       <div class="box-body">
          
-        <table class="table table-bordered table-striped dt-responsive tablaGastos" width="100%">
+		  <table id="tablaGastos" class="table table-bordered table-striped dt-responsive " width="100%">
 
           <thead>
             
@@ -42,8 +42,7 @@
               <th style="width:10px">Codigo</th>
               <th>Gastos</th>
 			  <th>valor</th> 
-			  <th>fecha</th>
-			  <th>valor</th>		  
+			  <th>fecha</th>		 
 			 
                <th>Acciones</th>
 
@@ -90,3 +89,10 @@
   </section>
 
 </div>
+	
+<script>
+$(function () {
+    
+    $('#tablaGastos').DataTable()
+  })
+</script>

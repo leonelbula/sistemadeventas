@@ -139,7 +139,7 @@ class Proveedor extends ModeloBase{
 	public function Guargar() {
 		$sql = "INSERT INTO proveedor VALUES (NULL,'{$this->getNombre()}','{$this->getNit()}','{$this->getDireccion()}',"
 			 . " '{$this->getDepartamento()}','{$this->getCiudad()}','{$this->getEmail()}','{$this->getTelefono()}',"
-			 . " '{$this->getVendedor()}', '{$this->getTel_vendedor()}',{$this->getImpuesto()})";
+			 . " '{$this->getVendedor()}', '{$this->getTel_vendedor()}')";
 		$resp = $this->db->query($sql);
 		$resul = FALSE;
 		if($resp){
@@ -150,7 +150,7 @@ class Proveedor extends ModeloBase{
 	public function Actualizar() {
 		$sql = "UPDATE proveedor SET nombre='{$this->getNombre()}',nit='{$this->getNit()}',direccion='{$this->getDireccion()}',"
 		. "departamento='{$this->getDepartamento()}',ciudad='{$this->getCiudad()}',email='{$this->getEmail()}',telefono='{$this->getTelefono()}',"
-		. "vendedor='{$this->getVendedor()}',tel_vendedor='{$this->getTel_vendedor()}',impuesto={$this->getImpuesto()} WHERE id = {$this->getId()}";
+		. "vendedor='{$this->getVendedor()}',tel_vendedor='{$this->getTel_vendedor()}' WHERE id = {$this->getId()}";
 		$resp = $this->db->query($sql);
 		$result = FALSE;
 		if($resp){

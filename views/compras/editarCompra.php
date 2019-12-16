@@ -25,7 +25,7 @@
 				Agregar Proveedor
 			</button>
 			
-			<a href="<?=URL_BASE?>ventas/">
+			<a href="<?=URL_BASE?>compras/compras">
 				<button class="btn btn-success" >
 
 				Cancelar

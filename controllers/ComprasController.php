@@ -9,7 +9,7 @@ require_once 'models/Proveedor.php';
 
 
 class ComprasController{
-	public function Compras() {
+	public function compras() {
 		require_once 'views/layout/menu.php';
 		if(isset($_GET["fechaInicial"])){
 			
@@ -52,7 +52,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})
@@ -208,7 +208,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})
@@ -389,7 +389,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})
@@ -406,7 +406,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})
@@ -424,25 +424,25 @@ class ComprasController{
 			while ($row1 = $detallesParrametros-> fetch_object()) {
 				$estadoIva = $row1->iva_incluido;				
 			}
-			$id_venta = $_GET['id'];
+			$id_compra = $_GET['id'];
 			//ver la venta anterios
-			$ventAnt = new Venta();
-			$ventAnt->setId($id_venta);
-			$ventaAn = $ventAnt->VerVenta();
+			$compraAnt = new Compra();
+			$compraAnt->setId($id_compra);
+			$compraAn = $compraAnt->VerCompra();
 			
-			while ($row =$ventaAn->fetch_object()) {
-				$listProductos = $row->detalle_venta;
+			while ($row =$compraAn->fetch_object()) {
+				$listProductos = $row->detalle_compra;
 				$num_factura = $row->codigo;
 			}
 			//eliminar los productos de la venta a modificar
-			$ventaProd = new VentaProduto();
-			$ventaProd->setNum_factura($num_factura);
-			$ventaProd->EliminarV();
+			$compraProd = new CompraProduto();
+			$compraProd->setNum_factura($num_factura);
+			$compraProd->EliminarV();
 			
 			//eliminando la compra del cliente			
-			$compraCliente = new CompraCliente();
-			$compraCliente->setNum_factura($num_factura);			
-			$compraCliente->EliminarVenta();
+			$compraProveedor = new CompraProveedor();
+			$compraProveedor->setNum_factura($num_factura);			
+			$compraProveedor->EliminarCompra();
 		
 			$listaProductos = json_decode($listProductos, true);
 			
@@ -457,15 +457,15 @@ class ComprasController{
 				while ($row = $respuest-> fetch_object()) {
 					$cantidad = $row->can_inicial;
 				}				
-				$nuevCantidad = $cantidad + $value['cantidad'];
+				$nuevCantidad = $cantidad - $value['cantidad'];
 				
 				$producto->setCantidad_Inicial($nuevCantidad);				
 				$producto->ActulizarStock();				
 				
 			}
-			$venta = new Venta();
-			$venta->setId($id_venta);
-			$resp = $venta->EliminarVenta();
+			$compra = new Compra();
+			$compra->setId($id_compra);
+			$resp = $compra->EliminarCompra();
 			if($resp){
 				echo'<script>
 
@@ -477,7 +477,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})
@@ -494,7 +494,7 @@ class ComprasController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "index";
+							window.location = "compras";
 
 							}
 						})

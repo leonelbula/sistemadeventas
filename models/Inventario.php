@@ -215,4 +215,9 @@ class Inventario {
 		$resp = $this->db->query($sql);		
 		return $resp;
 	}
+	public function stock() {		
+		$sql = "SELECT COUNT(id) AS total  FROM product WHERE cantidad_min >= can_inicial";
+		$resp = $this->db->query($sql);		
+		return $resp;
+	}
 }

@@ -1,12 +1,12 @@
-	
- $.ajax({
-
- 	url: "../ajax/tablaListasproveedor.php",
- 	success:function(respuesta){
-			console.log("respuesta", respuesta);
-	}
-
-})
+//	
+// $.ajax({
+//
+// 	url: "../ajax/tablaListasproveedor.php",
+// 	success:function(respuesta){
+//			console.log("respuesta", respuesta);
+//	}
+//
+//})
  
 $('.tablaproveedorL').DataTable( {
     "ajax": "../ajax/tablaListasproveedor.php",

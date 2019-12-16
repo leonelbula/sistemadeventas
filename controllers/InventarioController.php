@@ -56,11 +56,16 @@ class InventarioController {
 				}
 				if($estadoCodigo == 1){
 					$producto = new Inventario();
-					$ultimoproducto = $producto->MostrarUltimoProductos();
-					while ($row1 = $ultimoproducto-> fetch_object()) {
-						$utilimoCodigo = $row1->codigo;
-					}					
-					$codigoprod = $utilimoCodigo + 1;
+					$ultimoproducto = $producto->MostrarUltimoProductos();				
+									
+					if ($ultimoproducto->num_rows != 0) {
+						while ($row1 = $ultimoproducto->fetch_object()) {
+							$utilimoCodigo = $row1->codigo;
+						}
+						$codigoprod = $utilimoCodigo + 1;
+					}else{
+						$codigoprod = $codigo;
+					}
 					
 				}else{
 					$codigoprod = $codigoD;

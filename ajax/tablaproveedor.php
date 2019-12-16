@@ -28,7 +28,7 @@ class ProveedorCompraAjax {
 		 while ($row = $listaproveedor->fetch_object()) {		
 				
 
-  		$botones = "<button type='button' class='btn btn-primary agregarProveedor recuperarBoton' idProveedor='".$row->id."'>Agregar</button>";
+  		$botones = "<button type='button' class='btn btn-primary agregarProveedor recuperarBotonP' idProveedor='".$row->id."'>Agregar</button>";
   				
 		 
 		  	$datosJson .='[

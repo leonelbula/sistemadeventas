@@ -1,243 +1,203 @@
-<div class="main-content">
-	<div class="main-content-inner">
-		<div class="breadcrumbs ace-save-state" id="breadcrumbs">
-			<ul class="breadcrumb">
-				<li>
-					<i class="ace-icon fa fa-home home-icon"></i>
-					<a href="<?= URL_BASE ?>frontend/principal">Principal</a>
-				</li>
+<div class="content-wrapper">
+    
+  <section class="content-header">
+      
+    <h1>
+      Gestor Usuarios
+    </h1>
+ 
+    <ol class="breadcrumb">
 
-				<li>
-					<a href="#">lista de Usuarios</a>
-				</li>
+      <li><a href="<?=URL_BASE?>frontend/principal"><i class="fa fa-dashboard"></i> Inicio</a></li>
 
-			</ul><!-- /.breadcrumb -->
+      <li class="active">Gestor Usuarios</li>
+      
+    </ol>
 
+  </section>
 
-		</div>
-		<div class="page-header">
-			<h1>
-				<a href="#modal-form" role="button" class="blue" data-toggle="modal">
-					<button class="btn btn-info" type="submit">
-						<i class="ace-icon fa fa-check bigger-110"></i>
-						Registrar
-					</button>
-				</a>
-			</h1>
-		</div><!-- /.page-header --
+  <section class="content">
 
-		<div class="page-content">			
-			<div class="row">
-				<div class="col-xs-12">
-		<!-- PAGE CONTENT BEGINS -->
-		<div class="row">
-			<div class="col-xs-12">
-				<table id="simple-table" class="table  table-bordered table-hover">
-					<thead>
-						<tr>
+    <div class="box">
 
-							<th class="detail-col">Detalles</th>
-							<th>Usuario</th>
-							<th>Tipo</th>
-							<th class="hidden-480">Estado</th>
+      <div class="box-header with-border">
+		  
+          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarUsuario">
 
+            Nuevo Usuario
 
+          </button>
+		
+      </div>
+		
 
-							<th>Acciones</th>
-						</tr>
-					</thead>
+      <div class="box-body">
+         
+        <table class="table table-bordered table-striped dt-responsive" width="100%">
 
-					<tbody>
-						<?php while ($row = $listaUsuario->fetch_object()): ?>
-							<tr>
+          <thead>
+            
+            <tr>
+              
+              <th style="width:10px">Codigo</th>
+              <th>Nombre</th>
+			  <th>Tipo</th> 
+			  <th>Estado</th>			  
+               <th>Acciones</th>
 
+            </tr>
 
-								<td class="center">
-									<div class="action-buttons">
-										<a href="#" class="green bigger-140 show-details-btn" title="Ver Detalles">
-											<i class="ace-icon fa fa-angle-double-down"></i>
-											<span class="sr-only">Detalles</span>
-										</a>
-									</div>
-								</td>
+          </thead>
+		  <tbody>
+			  <?php 
+			  while ($row = $listaUsuario->fetch_object()) :
+				  
+			   ?>
+			  <tr>
+				  <td><?= $row->id_usuario?></td>
+				   <td><?= $row->nombre?></td>
+				   <td><?= $row->tipo?></td>
+				   <td><?php
+						if($row->estado == 1){
+							echo 'activado';							
+						} else {
+							echo 'Desactivado';
+						}
+						?></td>
+				    <td><?php if ($_SESSION["identity"]->tipo == "admin") {
 
-								<td>
-									<a href="<?= URL_BASE ?>usuario/perfil&id=<?= $row->id ?>"><?= $row->nombre ?></a>
-								</td>
-								<td><?= $row->tipo ?></td>
-								<td class="hidden-480">
-									<?php
-									if ($row->estado == 1) {
-										echo'Activado';
-									} else {
-										echo 'Desactivado';
-									}
-									?>
-								</td>																	
+								echo '<a href="'.URL_BASE.'usuario/editar&id='.$row->id_usuario.'"><button class="btn btn-warning "><i class="fa fa-pencil"></i></button></a>
 
-								<td>
-									<div class="hidden-sm hidden-xs btn-group">												
-										<a href="<?= URL_BASE ?>usuario/editar&id=<?= $row->id ?>">
-											<button class="btn btn-xs btn-info">
-												<i class="ace-icon fa fa-pencil bigger-120"></i>
-											</button>
-										</a>
-										<a href="<?= URL_BASE ?>usuario/eliminar&id=<?= $row->id ?>">
-											<button class="btn btn-xs btn-danger">
-												<i class="ace-icon fa fa-trash-o bigger-120"></i>
-											</button>
-										</a>
-									</div>
+                      <a href="'.URL_BASE.'usuario/eliminar&id='.$row->id_usuario.'"><button class="btn btn-danger "><i class="fa fa-times"></i></button></a>';
+							}?></td>
+			  </tr>
+			  <?php endwhile; ?>
+		  </tbody>
+		 
 
-									<div class="hidden-md hidden-lg">
-										<div class="inline pos-rel">
-											<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-												<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-											</button>
+        </table> 
 
-											<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-												<li>
-													<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-														<span class="blue">
-															<i class="ace-icon fa fa-search-plus bigger-120"></i>
-														</span>
-													</a>
-												</li>
+      </div>
+		
+        
+    </div>
+	  <div class="box-footer">
+          Usuarios
+        </div>
 
-												<li>
-													<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-														<span class="green">
-															<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
+  </section>
 
-												<li>
-													<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-														<span class="red">
-															<i class="ace-icon fa fa-trash-o bigger-120"></i>
-														</span>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-								</td>
-							</tr>
-
-							<tr class="detail-row">
-								<td colspan="8">
-									<div class="table-detail">
-										<div class="row">											
-
-											<div class="col-xs-12 col-sm-7">
-												<div class="space visible-xs"></div>
-
-												<div class="profile-user-info profile-user-info-striped">
-													<div class="profile-info-row">
-														<div class="profile-info-name"> Usuario </div>
-
-														<div class="profile-info-value">
-															<span><?= $row->nombre ?></span>
-														</div>
-													</div>
-
-													<div class="profile-info-row">
-														<div class="profile-info-name"> Tipo </div>
-
-														<div class="profile-info-value">																	
-															<span><?= $row->tipo ?></span>
-														</div>
-													</div>
-
-													<div class="profile-info-row">
-														<div class="profile-info-name"> Estado </div>
-
-														<div class="profile-info-value">
-															<span>
-																<?php
-																if ($row->estado == 1) {
-																	echo'Activado';
-																} else {
-																	echo 'Desactivado';
-																}
-																?></span>
-														</div>
-													</div>
-
-
-
-												</div>
-											</div>
-
-
-										</div>
-									</div>
-								</td>
-							</tr>
-						<?php endwhile; ?>
-
-					</tbody>
-				</table>
-			</div>
-		</div>
-
-	</div>
 </div>
-<div id="modal-form" class="modal" tabindex="-1">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="blue bigger">Nuevo Registro</h4>
-			</div>
 
-			<div class="modal-body">
-				<form action="<?= URL_BASE ?>usuario/guardar" enctype="multipart/form-data" method="POST">
+<div id="modalAgregarUsuario" class="modal fade" role="dialog">
+  
+  <div class="modal-dialog">
+    
+    <div class="modal-content">
 
-					<div class="form-group">
-						<label for="nombre">Nombre:</label>
-						<input type="text" class="form-control" name="nombre" id="nombre" required>
-					</div>
-					<div class="form-group">
-						<label for="direccion">Password:</label>
-						<input type="password" name="password" placeholder="Password" class="form-control" required />
-					</div>
-					<div class="form-group">
-						<label for="municipio">Tipo de Perfil:</label>
-						<select class="form-control"  name="tipo" required>
+		<form method="post" action="<?=URL_BASE?>usuario/guardar" enctype="multipart/form-data">
+
+        <!--=====================================
+        CABEZA DEL MODAL
+        ======================================-->
+        
+        <div class="modal-header" style="background:#3c8dbc; color:white">
+          
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          
+          <h4 class="modal-title">Agregar Usuario</h4>
+
+        </div>
+
+        <!--=====================================
+        CUERPO DEL MODAL
+        ======================================-->
+
+        <div class="modal-body">
+          
+          <div class="box-body">
+
+            <!--=====================================
+            ENTRADA DEL TITULO DE LA CATEGORÍA
+            ======================================-->
+
+            <div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"><i class="fa fa-user"></i></span>
+
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese nombre de usuario" required> 
+
+              </div> 
+
+            </div> 
+			<div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <input type="password" name="password" placeholder="Password" placeholder="Ingrese Contraseña" class="form-control" required />
+
+              </div> 
+
+            </div>     
+			<div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+               <select class="form-control"  name="tipo" required>
 							<option value="">Selecione una opcion</option>
 							<option value="usuario">Usuario</option>
 							<option value="admin">Administrador</option>									
 
 						</select>
-					</div>
-					<div class="form-group">
-						<label for="telefono">Desea Activar Perfil:</label>
-						<select class="form-control" name="estado" required>
+
+              </div> 
+
+            </div>  
+			<div class="form-group">
+              
+              <div class="input-group">
+                
+                <span class="input-group-addon"><i class="fa fa-th"></i></span>
+
+                <select class="form-control" name="estado" required>
 							<option value="">Seleccione una opcion</option>
 							<option value="1">Activado</option>
 							<option value="0">Desactivado</option>									
 
 						</select>
-					</div>
 
+              </div> 
 
+            </div>     
+          
+          </div>
 
+        </div>
 
+        <!--=====================================
+        PIE DEL MODAL
+        ======================================-->
 
+        <div class="modal-footer">
+          
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Salir</button>
 
-					<button type="submit" class="btn btn-primary">Guardar</button>
-				</form>
-			</div>
+          <button type="submit" class="btn btn-primary">Guardar</button>
 
-			<div class="modal-footer">
-				<button class="btn btn-sm" data-dismiss="modal">
-					<i class="ace-icon fa fa-times"></i>
-					Cancelar
-				</button>
+        </div>
 
-			</div>
-		</div>
-	</div>
+      </form>
+
+    
+    </div>
+
+  </div>
+
 </div>
+

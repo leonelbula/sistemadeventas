@@ -94,11 +94,9 @@
 				
 				 ?>
                 <tr>
-                  <td><?= $i++ ?></td>
-				  <td>Factura N°<?= $value['fecha']?></td>
+                  <td><?= $i++ ?></td>				 
 				  <td><?= $value['descripcion']?></td>
-				  
-				                
+				   <td><?= $value['fecha']?></td>				                
 				  <td><?= $value['valor']?></td>
 				 
 

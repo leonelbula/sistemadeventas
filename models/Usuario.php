@@ -1,9 +1,10 @@
 <?php
 
-require_once 'ModeloBase.php';
+require_once 'config/DataBase.php';
 
-class Usuario extends ModeloBase{
+class Usuario{
 	
+	public $db;
 	private $id_usuario;
 	private $nombre;
 	private $password;
@@ -51,15 +52,42 @@ class Usuario extends ModeloBase{
 	}
 
 	public function __construct() {
-		parent::__construct();
+		$this->db = Database::connect();
 	}
 	public function MostrarTodos() {
 		$sql = "SELECT * FROM usuarios ";
 		$resul = $this->db->query($sql);
 		return $resul;
 	}
+	public function MostrarUsuarioId() {
+		$sql = "SELECT * FROM usuarios WHERE id_usuario = {$this->getId_usuario()}";
+		$resul = $this->db->query($sql);
+		return $resul;
+	}
 	public function save() {
 		$sql = "INSERT INTO usuarios VALUE(NULL,'{$this->getNombre()}','{$this->getPassword()}','{$this->getEstado()}','{$this->getTipo()}')";
+		$save = $this->db->query($sql);
+		
+		$resul = false;
+		
+		if($save){
+			 $resul = true;
+		}
+		return $resul;
+	}
+	public function Actulizar() {
+		$sql = "UPDATE usuarios SET nombre='{$this->getNombre()}',password='{$this->getPassword()}',estado={$this->getEstado()},tipo='{$this->getTipo()}' WHERE id_usuario = {$this->getId_usuario()}";
+		$save = $this->db->query($sql);
+		
+		$resul = false;
+		
+		if($save){
+			 $resul = true;
+		}
+		return $resul;
+	}
+	public function Eliminar() {
+		$sql = "DELETE FROM usuarios WHERE id_usuario = {$this->getId_usuario()} ";
 		$save = $this->db->query($sql);
 		
 		$resul = false;

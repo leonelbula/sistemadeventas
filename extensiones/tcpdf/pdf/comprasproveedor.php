@@ -52,11 +52,11 @@ return $resul;
 //require_once '../../../controllers/InventarioController.php';
 class imprimirReporte{
 
-public $fechaInicio;
+public $fechaInicial;
 public $fechaFinal;
 
 public function traerImpresionReporte(){
-$fechaInicial = $this->fechaInicio;
+$fechaInicial = $this->fechaInicial;
 $fechaFinal = $this->fechaFinal;
 
 $reporte = new Reportes();

@@ -62,7 +62,7 @@
         
     </div>
 	  <div class="box-footer">
-          Proveedores
+          Clentes
         </div>
 
   </section>

@@ -12,7 +12,7 @@ class ListaProductoItemFactura {
 	}	
 
 	public function MostrarProductosId($id) {
-		$sql = "SELECT * FROM product WHERE id = $id";
+		$sql = "SELECT * FROM product0 WHERE id = $id";
 		$resul = $this->db->query($sql);
 		return $resul->fetch_object();
 	}

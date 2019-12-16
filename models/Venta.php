@@ -167,10 +167,11 @@ class Venta{
 		. "{$this->getId_plazo()},'{$this->getFecha_vencimiento()}',{$this->getId_cliente()},'{$this->getDetalle_venta()}',"
 		. "{$this->getSub_total()},{$this->getIva()},{$this->getTotal()},{$this->getSaldo()},{$this->getUtilidad()})";
 		$resp = $this->db->query($sql);
-		$resul = FALSE;
-		if($resp){
-			$resul = TRUE;
-		}
+		$link = $this->db;
+		$resul = mysqli_insert_id($link);
+//		if($resp){
+//			$resul = TRUE;
+//		}
 		return $resul;
 	}
 	public function VerUltimaVenta() {
@@ -231,6 +232,36 @@ class Venta{
 			} else {
 
 				$sql = "SELECT * FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal'";
+			}
+		}
+		
+		
+		$resul = $this->db->query($sql);
+		return $resul;
+	}
+	public function Ventas($fechaInicial,$fechaFinal) {
+		
+		
+		if($fechaInicial == $fechaFinal){
+			
+			$sql = "SELECT SUM(total) as total FROM venta WHERE fecha like '%$fechaFinal%'  AND id_plazo = 0";
+			
+		} else {
+			
+			$fechaActual = new DateTime();
+			$fechaActual->add(new DateInterval("P1D"));
+			$fechaActualMasUno = $fechaActual->format("Y-m-d");
+
+			$fechaFinal2 = new DateTime($fechaFinal);
+			$fechaFinal2->add(new DateInterval("P1D"));
+			$fechaFinalMasUno = $fechaFinal2->format("Y-m-d");
+
+			if ($fechaFinalMasUno == $fechaActualMasUno) {
+
+				$sql = "SELECT SUM(total) as total FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinalMasUno' AND id_plazo = 0";
+			} else {
+
+				$sql = "SELECT SUM(total) as total FROM venta WHERE fecha BETWEEN '$fechaInicial' AND '$fechaFinal' AND id_plazo = 0";
 			}
 		}
 		

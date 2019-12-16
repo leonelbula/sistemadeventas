@@ -1,5 +1,7 @@
 <?php
 require_once 'models/Usuario.php';
+require_once 'models/Inventario.php';
+require_once 'models/Notificaciones.php';
 
 class UsuarioController{
 	
@@ -8,6 +10,124 @@ class UsuarioController{
 		$listaUsuario = $usuarios->MostrarTodos();
 		require_once 'views/layout/menu.php';
 		require_once 'views/usuario/listausuario.php';
+		require_once 'views/layout/copy.php';
+	}
+	public function editar() {
+		if(isset($_GET['id'])){
+			$id_usuario = $_GET['id'];
+			
+			$usaurio = new Usuario();
+			$usaurio->setId_usuario($id_usuario);
+			$detallesUsuario = $usaurio->MostrarUsuarioId();
+			
+			require_once 'views/layout/menu.php';
+			require_once 'views/usuario/editar.php';
+			require_once 'views/layout/copy.php';
+		}else{
+			echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡Debe selecionar un usuario !",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+			}
+		
+	}
+	public function actulizar() {
+		if($_POST['id']){
+			$id_usuario = isset($_POST['id']) ? $_POST['id'] : false;
+			$nombre = isset($_POST['nombre']) ? $_POST['nombre'] : false;
+			$pass = isset($_POST['password']) ? $_POST['password'] : false;
+			$tipo = isset($_POST['tipo']) ? $_POST['tipo'] : false;
+			$estado = isset($_POST['estado']) ? $_POST['estado'] : false;
+			$passAnterio = $_POST['passswordAntigua'];
+			
+			if($nombre){
+				
+				$usuario = new Usuario();
+				
+				$usuario->setId_usuario($id_usuario);
+				$usuario->setNombre($nombre);
+				if(!empty($_POST['password'])){
+					$password = password_hash($pass, PASSWORD_BCRYPT, ['cost' => 4]);
+				}else{
+					$password = $passAnterio;
+				}
+				$usuario->setPassword($password);
+				$usuario->setTipo($tipo);
+				$usuario->setEstado($estado);
+				
+				$resp = $usuario->Actulizar();
+				
+				if($resp){
+					
+					echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "Usuario ha sido actulizado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+					</script>';
+					
+				}else{
+					echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡No se puedo actulizar Usuario!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+
+			  	
+				}
+				
+			}
+		}else{
+			echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡Debe selecionar un usuario !",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+		}
 	}
 	public function Login() {
 		if($_POST){
@@ -27,6 +147,16 @@ class UsuarioController{
 					$_SESSION['identity'] = $identity;
 					
 					if($_SESSION['identity']->estado == 1){
+						
+						$productos = new Inventario();
+						$detalles = $productos->stock();
+						while ($row = $detalles->fetch_object()) {
+							$producto_stock = (int)$row->total;
+						}
+						$notificacion = new Notificaciones();
+						$notificacion->setProducto_stock($producto_stock);
+						$est = $notificacion->NuevaNotificacionProductos();
+												
 						echo'<script>
 
 						swal({
@@ -101,7 +231,7 @@ class UsuarioController{
 
 							</script>';
 		}
-	}
+	}	
 	public function Guardar() {
 		if (isset($_POST)) {
 			
@@ -156,7 +286,7 @@ class UsuarioController{
 						  }).then(function(result){
 							if (result.value) {
 
-							window.location = "registro";
+							window.location = "index";
 
 							}
 						})
@@ -171,6 +301,67 @@ class UsuarioController{
 			
 		}
 	}
+	public function Eliminar() {
+		if($_GET['id']){
+			$id_usuario = $_GET['id'];
+			$usuario = new Usuario();
+			$usuario->setId_usuario($id_usuario);
+			$resp = $usuario->Eliminar();
+			
+			if($resp){
+				echo'<script>
+
+					swal({
+						  type: "success",
+						  title: "Usuario eliminado correctamente",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+					</script>';
+			}else{
+				echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡No se puedo eliminar Usuario!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+			}
+		}else{
+			echo'<script>
+
+					swal({
+						  type: "error",
+						  title: "¡debe elegir un Usuario!",
+						  showConfirmButton: true,
+						  confirmButtonText: "Cerrar"
+						  }).then(function(result){
+							if (result.value) {
+
+							window.location = "index";
+
+							}
+						})
+
+			  	</script>';
+		}
+	}
 	public function Salir() {
 		if(isset($_SESSION['identity'])){
 			unset($_SESSION['identity']);
@@ -180,4 +371,5 @@ class UsuarioController{
 				window.location="' . URL_BASE .'";
 			</script>';
 	}
+	
 }

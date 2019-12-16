@@ -1,4 +1,3 @@
-
 	
  ///$.ajax({
 
@@ -83,7 +82,7 @@ $(".tablaproveedorCompra tbody").on("click", "button.agregarProveedor", function
 			$(".cabeceraCompra").append(
 					'<div class="col-sm-4 invoice-col">'+					
 					'<input type="hidden" class="idproveedorcompra" value="'+id+'"/>'+					
-					'<input type="hidden" class="proveedor" value="'+id+'" />'+
+					'<input type="hidden" idProveedor="'+id+'" class="proveedor"  value="'+id+'" />'+
 				'<address>'+
 					'<strong> Cliente </strong><br>'+
 					''+Nombre+'<br>'+Direccion+					
@@ -118,7 +117,7 @@ $(".cabeceraCompra").on("click", "button.quitarProveedor", function(){
 	//console.log("boton");
 	$(this).parent().parent().remove();
 	
-	var idCliente = $(this).attr("idProveedor");
+	var idProveedor = $(this).attr("idProveedor");
 	
 	/*=============================================
 	ALMACENAR EN EL LOCALSTORAGE EL ID DEL PRODUCTO A QUITAR
@@ -137,9 +136,9 @@ $(".cabeceraCompra").on("click", "button.quitarProveedor", function(){
 
 	localStorage.setItem("quitarProveedor", JSON.stringify(idQuitarProveedor));
 	
-	$("button.recuperarBoton[idProveedor='"+idProveedor+"']").removeClass('btn-default');
+	$("button.recuperarBotonP[idProveedor='"+idProveedor+"']").removeClass('btn-default');
 
-	$("button.recuperarBoton[idProveedor='"+idProveedor+"']").addClass('btn-primary agregarProveedor');
+	$("button.recuperarBotonP[idProveedor='"+idProveedor+"']").addClass('btn-primary agregarProveedor');
 	
 	$("button.agregarProveedor").addClass('btn-primary agregarProveedor');
 	

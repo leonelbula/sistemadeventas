@@ -135,7 +135,13 @@
 					<input type="text" class="form-control" value="<?=$row1->email?>"  name="email" >
                 </div>
                 <!-- /.input group -->
-              </div>          
+              </div>   
+			  
+			  <button class="btn btn-primary" type="submit">
+
+            Editar cliente
+
+          </button>
 			   
             </div>
             <!-- /.box-body -->
@@ -143,80 +149,8 @@
          
         </div>
         <!-- /.col (left) -->
-        <div class="col-md-6">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Informacion Contable</h3>
-            </div>
-            <div class="box-body">
-				<div class="form-group">
-                <label>Tipo de Cliente:</label>
-
-                <select class="form-control select2" name="tipo" style="width: 100%;">
-                  <option selected="selected">Seleciones el tipo</option>
-				  <option value="1" <?=$row1->tipo == 1?'selected ': ''?>>Por Mayor</option>                
-				  <option value="0" <?=$row1->tipo == 0?'selected ': ''?>>Cliente Generico</option>				
-                </select>
-                <!-- /.input group -->
-              </div>
-              <!-- Date -->
-              <div class="form-group">              
-                <label>Precio a facturar:</label>
-
-                <select class="form-control select2" name="precio_fact" style="width: 100%;">
-                  <option selected="selected">Seleciones una opcion</option>
-				  <option value="1" <?=$row1->precio_fact == 1?'selected ': ''?>>Precio 1</option>                  
-				  <option value="2" <?=$row1->precio_fact == 2?'selected ': ''?>>Precio 2</option>
-				  <option value="3" <?=$row1->precio_fact == 3?'selected ': ''?>>Precio 3</option>		
-                </select>
-                <!-- /.input group -->
-              </div>
-			  <div class="form-group">
-               <label>Se aplica interes por Mora:</label>
-                <select class="form-control select2" name="interes" style="width: 100%;">
-					<option value="0" selected="selected">Seleciones la opcion</option>
-					<option value="0"  <?=$row1->interes == 0 ?'selected ': ''?>>No se le Aplica Interes</option>
-                  <?php 
-						$retencion= ExtrasController::listaIntereses();
-						while ($rowR = $retencion->fetch_object()):							
-						
-					?>
-				  <option value="<?=$rowR->porcentaje?>"<?=$row1->interes == $rowR->porcentaje ?'selected ': ''?>><?=$rowR->descripcion?></option>
-				  <?php endwhile; ?>     
-                </select>
-              </div>
-              <!-- /.form group -->
-
-              <!-- Date range -->
-              <div class="form-group">
-                <label>Cuenta Contable:</label>
-
-                <select class="form-control select2" name="cuentacontable" style="width: 100%;">
-					<option  value="0" selected="selected">Seleciones Cuenta Contable</option>
-				  <?php 
-						$cuentas = CuentasContableController::ListarCuentas();
-						while ($row = $cuentas->fetch_object()):							
-						
-					?>
-				  <option value="<?=$row->num_cuenta?>" <?=$row1->cuenta_contable == $row->num_cuenta ? 'selected':''?>><?=$row->num_cuenta?> - <?=$row->descripcion?></option>
-				  <?php endwhile; ?>                
-              
-                 
-                </select>
-                <!-- /.input group -->
-              </div>
-			  <button class="btn btn-primary" type="submit">
-
-            Editar cliente
-
-          </button>
-			
-            </div>
-            <!-- /.box-body -->
-          </div>
         
-        <?php endwhile; ?>
-        </div>
+		<?php endwhile; ?>
         <!-- /.col (right) -->
 		  </form>
       </div>
@@ -224,7 +158,7 @@
 	  </div>
       </div>
         
-    </div>
+
 
   </section>
 

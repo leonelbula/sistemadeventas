@@ -10,7 +10,11 @@ public $db;
 public function __construct() {
 $this->db = Database::connect();
 }	
-
+public function MostrarInformacionEmpresa() {
+$sql = "SELECT * FROM datos_empresa ";
+$resul = $this->db->query($sql);
+return $resul;
+}
 public function VerCompraCodigo($codigo) {
 $sql = "SELECT * FROM compra WHERE numero_factura = $codigo";
 $resul = $this->db->query($sql);
@@ -35,6 +39,17 @@ public function traerImpresionFactura(){
 $codigo = $this->codigo;
 $factura = new ListaCompra();
 $detalles = $factura->VerCompraCodigo($codigo);
+
+$datosEmpresa = $factura->MostrarInformacionEmpresa();
+
+foreach ($datosEmpresa as $key => $valueE) {
+$nomEmpresa = $valueE['nombre'];
+$nitEmpresa = $valueE['nit'];
+$dirEmpresa = $valueE['direccion'];
+$ciuEmpresa = $valueE['ciudad'];
+$depEmpresa = $valueE['departamento'];
+$telEmpresa = $valueE['telefono'];
+}
 
 
 while ($row = $detalles-> fetch_object()) {
@@ -75,17 +90,17 @@ $bloque1 = <<<EOF
 		
 		<tr>
 			
-			<td style="width:150px"><img src="images/logo-negro-bloque.png"></td>
+			<td style="width:150px"><br><br><br>$nomEmpresa</td>
 
 			<td style="background-color:white; width:140px">
 				
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
 					<br>
-					NIT: 1.069.487.850
+					Nit: $nitEmpresa
 
 					<br>
-					Dirección: Carrera 11 N 21-20
+					$dirEmpresa
 
 				</div>
 
@@ -96,10 +111,10 @@ $bloque1 = <<<EOF
 				<div style="font-size:8.5px; text-align:right; line-height:15px;">
 					
 					<br>
-					Teléfono: 300 741 27 21
+					Telefono: $telEmpresa;
 					
 					<br>
-					ventas@sacv.com
+					$ciuEmpresa - $depEmpresa
 
 				</div>
 				

@@ -33,57 +33,53 @@ if (!isset($_SESSION['identity'])) {
       <!-- Sidebar toggle button-->
       <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
         <span class="sr-only">Navegación</span>
-      </a>
-
+      </a>	  
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">        
-        
+        <?php
+			$Notificacion = frontendController::Notificaciones();
+			
+			while ($row = $Notificacion->fetch_object()) {
+				$productos = $row->producto_stock;
+				$cliente = $row->cliente_mora;
+			}
+			 $totalNotificacion = $productos + $cliente;
+	 
+	  ?>
           <!-- Notifications: style can be found in dropdown.less -->
           <li class="dropdown notifications-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <i class="fa fa-bell-o"></i>
-              <span class="label label-warning">10</span>
+              <span class="label label-warning"><?= $totalNotificacion?></span>
             </a>
             <ul class="dropdown-menu">
-              <li class="header">You have 10 notifications</li>
+              <li class="header">Hay <?= $totalNotificacion?> notificaciones</li>
               <li>
                 <!-- inner menu: contains the actual data -->
                 <ul class="menu">
                   <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-red"></i> Hay Productos Stock bajo
+					  <a href="" class="actualizarNotificaciones" item="producto_stock">
+                      <i class="fa fa-shopping-cart text-red"></i> <?= $productos?> Hay Productos Stock bajo
                     </a>
                   </li>                  
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-users text-red"></i> 5 Pedido
+<!--                  <li>
+                    <a href="" class="actualizarNotificaciones" item="cliente_mora">
+                      <i class="fa fa-users text-red"></i>  Tienes Clientes mora
                     </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-shopping-cart text-green"></i> 25 sales made
-                    </a>
-                  </li>
-                  <li>
-                    <a href="#">
-                      <i class="fa fa-user text-red"></i> You changed your username
-                    </a>
-                  </li>
+                  </li>                        -->
                 </ul>
-              </li>
-              <li class="footer"><a href="#">View all</a></li>
+              </li>              
             </ul>
           </li>         
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="<?= URL_BASE ?>assets/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              
               <span class="hidden-xs"><?= $_SESSION['identity']->nombre ?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
-              <li class="user-header">
-                <img src="<?= URL_BASE ?>assets/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+              <li class="user-header">                
 
                 <p>
                   <?= $_SESSION['identity']->nombre ?>
@@ -133,7 +129,8 @@ if (!isset($_SESSION['identity'])) {
             <li><a href="<?=URL_BASE?>cliente/estadocuenta"><i class="fa fa-circle-o"></i> Estado de Cuenta</a></li>
                  
           </ul>
-        </li>        
+        </li>
+		<?php  if ($_SESSION["identity"]->tipo == "admin"){ ?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-th"></i>
@@ -143,10 +140,11 @@ if (!isset($_SESSION['identity'])) {
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?=URL_BASE?>pedido/"><i class="fa fa-circle-o"></i>Realuzar Pedidos</a></li>   
+            <li><a href="<?=URL_BASE?>pedido/"><i class="fa fa-circle-o"></i>Realizar Pedidos</a></li>   
       		
           </ul>
         </li>
+		
         <li class="treeview">
           <a href="#">
             <i class="fa fa-pie-chart"></i>
@@ -175,7 +173,19 @@ if (!isset($_SESSION['identity'])) {
                    
           </ul>
         </li>
+		<?php } ?>
         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-edit"></i> <span>PUNTO DE VENTAS</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-left pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?=URL_BASE?>ventas/inicarventas"><i class="fa fa-circle-o"></i>Iniciar Ventas</a></li>                      
+          </ul>
+        </li>
+		<li class="treeview">
           <a href="#">
             <i class="fa fa-edit"></i> <span>VENTAS</span>
             <span class="pull-right-container">
@@ -184,9 +194,12 @@ if (!isset($_SESSION['identity'])) {
           </a>
           <ul class="treeview-menu">
             <li><a href="<?=URL_BASE?>ventas/listarventas"><i class="fa fa-circle-o"></i> Ventas</a></li>
+			<?php  if ($_SESSION["identity"]->tipo == "admin"){ ?>
             <li><a href="<?=URL_BASE?>ventas/reporteventas"><i class="fa fa-circle-o"></i> Reportes Ventas</a></li>          
-          </ul>
+			<?php } ?>
+		  </ul>
         </li>
+		<?php  if ($_SESSION["identity"]->tipo == "admin"){ ?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-table"></i> <span>COMPRAS</span>
@@ -196,10 +209,11 @@ if (!isset($_SESSION['identity'])) {
           </a>
           <ul class="treeview-menu">
             <li><a href="<?=URL_BASE?>compras/Compras"><i class="fa fa-circle-o"></i>Lista Compras</a></li>
-<!--			<li><a href="<?=URL_BASE?>compras/"><i class="fa fa-circle-o"></i> Compras por periodo</a></li> -->
+<!--			<li><a href="compras/"><i class="fa fa-circle-o"></i> Compras por periodo</a></li> -->
             <li><a href="<?=URL_BASE?>compras/reportecompra"><i class="fa fa-circle-o"></i> Reportes</a></li>
           </ul>
         </li> 
+		<?php } ?>
 		<li class="treeview">
           <a href="#">
             <i class="fa fa-book"></i>
@@ -211,11 +225,12 @@ if (!isset($_SESSION['identity'])) {
           <ul class="treeview-menu">
 			  <li><a href="<?=URL_BASE?>gastos/"><i class="fa fa-circle-o"></i>Gastos</a></li>     
             <li><a href="<?=URL_BASE?>gastos/nuevogastos"><i class="fa fa-circle-o"></i>Regitrar Gastos</a></li>     
-      			
+      			<?php  if ($_SESSION["identity"]->tipo == "admin"){ ?>
       			<li><a href="<?=URL_BASE?>gastos/reportes"><i class="fa fa-circle-o"></i> Reportes</a></li> 
-          
+				<?php } ?>
           </ul>
         </li>
+		<?php  if ($_SESSION["identity"]->tipo == "admin"){ ?>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-folder"></i> <span>REPORTES</span>
@@ -237,7 +252,7 @@ if (!isset($_SESSION['identity'])) {
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="#"><i class="fa fa-circle-o"></i> Registrar Usuario</a></li>
+            <li><a href="<?=URL_BASE?>usuario/"><i class="fa fa-circle-o"></i>Usuario</a></li>
             <li class="treeview">
               <a href="#"><i class="fa fa-circle-o"></i> Permisos de Usuario
                 <span class="pull-right-container">
@@ -248,7 +263,7 @@ if (!isset($_SESSION['identity'])) {
           </ul>
         </li>
         <li><a href="<?=URL_BASE?>parametros/"><i class="fa fa-book"></i> <span>PARAMETROS</span></a></li>
-       
+		<?php } ?>
       </ul>
     </section>
     <!-- /.sidebar -->

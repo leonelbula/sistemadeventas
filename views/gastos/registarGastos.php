@@ -54,7 +54,7 @@
                   <div class="input-group-addon">
                     <i class="fa fa-calendar"></i>
                   </div>
-					<input type="date" class="form-control" name="fecha" required>
+					<input type="date" class="form-control" name="fecha" value="<?= date('Y-m-d')?>" required>
                 </div>
                 <!-- /.input group -->
               </div>

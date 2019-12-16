@@ -1,5 +1,10 @@
-<!-- Content Wrapper. Contains page content -->
-<input type="hidden" id="tipoIva" value="1" />
+<?php 
+	$datos = ParametrosController::Parrametros(); 
+	while ($row = $datos-> fetch_object()) {
+		$ivaIncluido = $row->iva_incluido;
+	}
+?>
+<input type="hidden" id="tipoIva" value="<?= $ivaIncluido?>" />
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -25,7 +30,7 @@
 				Agregar Proveedor
 			</button>
 			
-			<a href="<?=URL_BASE?>ventas/">
+			<a href="<?=URL_BASE?>compras/compras">
 				<button class="btn btn-success" >
 
 				Cancelar
@@ -286,7 +291,7 @@
 
 <div id="modalAgregarProductos" class="modal fade modalProduto" role="dialog">
 
-	<div class="modal-dialog modal-lg">
+	<div class="modal-dialog">
 
 		<div class="modal-content">
 
@@ -316,7 +321,7 @@
 
 					<div class="form-group">
 
-						<div class="col-xs-8 table-responsive modalProduto">
+						<div class="col-xs-12 table-responsive modalProduto">
 							<table class="table table-bordered table-striped dt-responsive  tablaproductoCompra">
 								<thead>
 									<tr>

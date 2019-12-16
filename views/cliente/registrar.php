@@ -126,7 +126,11 @@
               </div>           
 			   	   
             </div>
-            <!-- /.box-body -->
+            <button class="btn btn-primary" type="submit">
+
+            Guardar 
+
+          </button>
           </div>
           <!-- /.box -->
 

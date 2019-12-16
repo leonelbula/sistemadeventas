@@ -24,7 +24,7 @@
 
 			<div class="box-header with-border">
 
-				<div class="input-group">
+<!--				<div class="input-group">
 
 					<button type="button" class="btn btn-default" id="daterange-btn1">
 
@@ -36,7 +36,7 @@
 
 					</button>
 
-				</div>
+				</div>-->
 
 				
 			</div>

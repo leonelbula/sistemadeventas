@@ -42,7 +42,7 @@
 				</div>
 			</div>
 			<div class="box-body">
-				<table class=" table table-bordered table-striped dt-responsive tablas" style="width:100%">
+				<table id="ventasRealizadas" class=" table table-bordered table-striped dt-responsive" style="width:100%">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -60,13 +60,14 @@
 						
 						
 						$i = 1;
-						while ($row = $listaVentas->fetch_object()) {
-							echo '<tr>
+						while ($row = $listaVentas->fetch_object()): ?>
+							<tr>
 
-							 <td>' . ($i++) . '</td>
+							 <td><?=$i++ ?></td>
 
-							 <td>' . $row->codigo . '</td>';
-							$id = $row->id_cliente;
+							 <td><?= $row->codigo?></td>
+						<?php
+						   $id = $row->id_cliente;
 							$detallesCliente = ClienteController::MostrarClienteId($id);
 							while ($row1 = $detallesCliente->fetch_object()) {
 								$Nomclientes = $row1->nombre;
@@ -85,40 +86,40 @@
 
 								$tipo = "<button class='btn btn-info btn-xs'>Contado</button>";
 							}
-							echo'<td>' . $tipo . '</td>                              
+							?>
+							<td><?=$tipo ?></td>                              
                  
 					 <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-info btnImprimirFactura" codigoVenta="'.$row->codigo.'">
+                      <button class="btn btn-info btnImprimirFactura" codigoVenta="<?=$row->codigo?>">
 
                         <i class="fa fa-print"></i>
 
-                      </button>';
-
+                      </button>
+					  <?php
 							if ($_SESSION["identity"]->tipo == "admin") {
 
 								echo '<button class="btn btn-warning btnEditarVenta" idVenta="'.$row->id.'"><i class="fa fa-pencil"></i></button>
 
                       <button class="btn btn-danger btnEliminarVenta" idVenta="'.$row->id.'"><i class="fa fa-times"></i></button>';
 							}
-
-							echo '</div>  
+							?>
+						</div>  
 						
-                  </td>
-				  <td>				 
-				  </td>
+                  </td>				  
 
-                </tr>';
-						}
-						?>
+                </tr>
+						
+					<?php endwhile;	?>
 					</tbody>
 				</table>
 			</div>
 			<!-- /.box-body -->
 			<div class="box-footer">
 				lista ventas
+				
 			</div>
 			<!-- /.box-footer-->
 		</div>
@@ -126,4 +127,13 @@
 
     </section>
     <!-- /.content -->
+	
+	
+	<script>
+  $(function () {
+    $('#ventasRealizadas').DataTable()
+    
+  })
+</script>
 </div>
+

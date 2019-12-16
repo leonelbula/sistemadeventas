@@ -1,7 +1,3 @@
-
-/*=============================================
-BOTON EDITAR VENTA
-=============================================*/
 $(".tablasCompra").on("click", ".btnEditarCompra", function(){
 
 	var idCompra = $(this).attr("idCompra");
@@ -38,7 +34,7 @@ $(".tablaCompra").on("click", ".btnEliminarCompra", function(){
 IMPRIMIR FACTURA
 =============================================*/
 
-$(".tablasCompra").on("click", ".btnImprimirFactura", function(){
+$(".tablasCompra").on("click", ".btnImprimirFacturaCompra", function(){
 
 	var codigoCompra = $(this).attr("codigoCompra");
 

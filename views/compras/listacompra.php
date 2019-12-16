@@ -29,20 +29,11 @@
 							Nuevo Compra
 
 						</button>
-					</a>
-					<button type="button" class="btn btn-default pull-right" id="daterange-btn2">
-
-						<span>
-							<i class="fa fa-calendar"></i> Rango de fecha
-						</span>
-
-						<i class="fa fa-caret-down"></i>
-
-					</button>
+					</a>					
 				</div>
 			</div>
 			<div class="box-body">
-				<table id="tablascompras" class="table table-bordered table-striped dt-responsive" width="100%">
+				<table id="tablascompras" class="table table-bordered table-hover tablasCompra" width="100%">
 					<thead>
 						<tr>
 							<th>#</th>
@@ -83,33 +74,32 @@
 
 								$tipo = "<button class='btn btn-info btn-xs'>Contado</button>";
 							}
-							echo'<td>' . $tipo . '</td>                              
+							echo'<td>' . $tipo . '</td> '; ?>                             
                  
 					 <td>
 
                     <div class="btn-group">
                         
-                      <button class="btn btn-info btnImprimirFactura" codigoCompra="'.$row->numero_factura.'">
+                      <button class="btn btn-info btnImprimirFacturaCompra" codigoCompra="<?= $row->numero_factura ?>">
 
                         <i class="fa fa-print"></i>
 
-                      </button>';
+                      </button>
+					  <?php
+							if ($_SESSION["identity"]->tipo == "admin") { ?>
 
-							if ($_SESSION["identity"]->tipo == "admin") {
+							<button class="btn btn-warning btnEditarCompra" idCompra="<?=$row->id ?>"><i class="fa fa-pencil"></i></button>
 
-								echo '<button class="btn btn-warning btnEditarCompra" idCompra="'.$row->id.'"><i class="fa fa-pencil"></i></button>
+                      <button class="btn btn-danger btnEliminarCompra" idCompra="<?=$row->id ?>"><i class="fa fa-times"></i></button>
+						<?php	} ?>
 
-                      <button class="btn btn-danger btnEliminarCompra" idCompra="'.$row->id.'"><i class="fa fa-times"></i></button>';
-							}
-
-							echo '</div>  
+							</div>  
 						
                   </td>
-				  <td>				 
-				  </td>
+				  
 
-                </tr>';
-						}
+                </tr>
+					<?php	}
 						?>
 					</tbody>
 				</table>
@@ -125,3 +115,9 @@
     </section>
     <!-- /.content -->
 </div>
+<script>
+  $(function () {
+   
+    $('#tablascompras').DataTable()
+  })
+</script>

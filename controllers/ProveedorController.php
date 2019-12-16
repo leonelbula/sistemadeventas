@@ -68,7 +68,7 @@ class ProveedorController {
 			$email = isset($_POST['email']) ? $_POST['email']:FALSE;
 			$vendedor = isset($_POST['vendedor']) ? $_POST['vendedor']:FALSE;
 			$tel_vendedor = isset($_POST['tel_vendedor']) ? $_POST['tel_vendedor']:FALSE;
-			$impuesto = isset($_POST['impuesto']) ? $_POST['impuesto']:FALSE;		
+				
 			
 			
 			if($nombre && $nit && $direccion && $ciudad){
@@ -82,7 +82,7 @@ class ProveedorController {
 				$proveedor->setEmail($email);
 				$proveedor->setVendedor($vendedor);
 				$proveedor->setTel_vendedor($tel_vendedor);
-				$proveedor->setImpuesto($impuesto);				
+						
 				
 				$resp = $proveedor->Guargar();
 			
@@ -136,7 +136,7 @@ class ProveedorController {
 			$email = isset($_POST['email']) ? $_POST['email']:FALSE;
 			$vendedor = isset($_POST['vendedor']) ? $_POST['vendedor']:FALSE;
 			$tel_vendedor = isset($_POST['tel_vendedor']) ? $_POST['tel_vendedor']:FALSE;
-			$impuesto = isset($_POST['impuesto']) ? $_POST['impuesto']:FALSE;			
+			
 			
 			if($id && $nombre && $nit){
 				$proveedor = new Proveedor();
@@ -150,7 +150,7 @@ class ProveedorController {
 				$proveedor->setEmail($email);
 				$proveedor->setVendedor($vendedor);
 				$proveedor->setTel_vendedor($tel_vendedor);
-				$proveedor->setImpuesto($impuesto);			
+				
 			
 				$resp = $proveedor->Actualizar();
 				
@@ -159,7 +159,7 @@ class ProveedorController {
 
 					swal({
 						  type: "success",
-						  title: "Proveedor Guardado Correctamente",
+						  title: "Proveedor Actualizado Correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){

@@ -21,19 +21,13 @@
     <div class="box">
 
       <div class="box-header with-border">
-		  <a href="<?=URL_BASE?>proveedor/registrar">
-          <button class="btn btn-primary" data-toggle="modal" data-target="#modalAgregarCategoria">
-
-            Nuevo proveedor
-
-          </button>
-		  </a>
+		 
       </div>
 		
 
       <div class="box-body">
          
-        <table class="table table-bordered table-striped dt-responsive" width="100%">
+		  <table id="tablasPedido" class="table table-bordered table-striped dt-responsive " width="100%">
 
           <thead>
             
@@ -50,7 +44,35 @@
             </tr>
 
           </thead>
-		 
+		   <tbody>
+			   <?php 
+			   	
+			   foreach ($listaproveedor as $key => $value):			  
+			  
+				
+				 ?>
+                <tr>
+				  <td><?= $value['id']?></td>	  
+                  <td><?= $value['nombre']?></td>
+				  <td><?= $value['telefono']?></td>
+				  <td><?= $value['email']?></td>
+				  <td><?= $value['vendedor']?></td>
+				  <td><?= $value['tel_vendedor']?></td>
+				 
+                  <td>
+					  <div class="btn-group">
+						 
+							  <button class="btn btn-warning btnverpedido" verPedido=<?=$value['id']?>>
+								  <i class="fa fa-eye"></i>
+							  </button>
+							  
+						 
+						 
+					  </div>
+				  </td>
+                </tr>
+				<?php endforeach; ?>
+		   </tbody>
 
         </table> 
 
@@ -65,3 +87,10 @@
   </section>
 
 </div>
+
+<script>
+	$(function () {
+    $('#tablasPedido').DataTable()   
+  })
+
+</script>

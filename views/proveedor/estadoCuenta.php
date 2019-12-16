@@ -90,4 +90,9 @@
   </section>
 
 </div>
+<script>
+	$(function () {
+    $('.tablaestadocuentaprovedor').DataTable()   
+  })
 
+</script>

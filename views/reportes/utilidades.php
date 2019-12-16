@@ -24,9 +24,9 @@
 
 			<div class="box-header with-border">
 
-				<div class="input-group">
+				<div class="input-group pull-right">
 
-					<button type="button" class="btn btn-default" id="daterange-btnU">
+					<button type="button" class="btn btn-default " id="daterange-btnU">
 
 						<span>
 							<i class="fa fa-calendar"></i> Rango de fecha

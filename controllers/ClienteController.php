@@ -43,7 +43,7 @@ class ClienteController {
 
 					swal({
 						  type: "error",
-						  title: "¡Debe selecionar proveedor a Editar!",
+						  title: "¡Debe selecionar cliente a Editar!",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -67,10 +67,8 @@ class ClienteController {
 			$ciudad = isset($_POST['ciudad']) ? $_POST['ciudad']:FALSE;
 			$telefono = isset($_POST['telefono']) ? $_POST['telefono']:FALSE;
 			$email = isset($_POST['email']) ? $_POST['email']:FALSE;
-			$tipo = isset($_POST['tipo']) ? $_POST['tipo']:FALSE;
-			$precio_facturar = isset($_POST['precio_fact']) ? $_POST['precio_fact']:FALSE;
-			$interes = isset($_POST['interes']) ? $_POST['interes']:FALSE;
-			$cuenta_contable = isset($_POST['cuentacontable']) ? $_POST['cuentacontable']:FALSE;
+			
+			
 			
 			if($nombre && $nit && $direccion && $ciudad){
 				$cliente = new Cliente();
@@ -81,18 +79,16 @@ class ClienteController {
 				$cliente->setCiudad(strtoupper($ciudad));
 				$cliente->setTelefono($telefono);
 				$cliente->setEmail($email);
-				$cliente->setTipo($tipo);
-				$cliente->setPrecio_facturar($precio_facturar);
-				$cliente->setInteres($interes);				
-				$cliente->setCuenta_contable($cuenta_contable);
 				
-				$resp = $cliente->Guargar();				
+				
+				$resp = $cliente->Guargar();
+								
 				if ($resp) {
 					echo'<script>
 
 					swal({
 						  type: "success",
-						  title: "Proveedor Guardado Correctamente",
+						  title: "Cliente Guardado Correctamente",
 						  showConfirmButton: true,
 						  confirmButtonText: "Cerrar"
 						  }).then(function(result){
@@ -135,10 +131,8 @@ class ClienteController {
 			$ciudad = isset($_POST['ciudad']) ? $_POST['ciudad']:FALSE;
 			$telefono = isset($_POST['telefono']) ? $_POST['telefono']:FALSE;
 			$email = isset($_POST['email']) ? $_POST['email']:FALSE;
-			$tipo = isset($_POST['tipo']) ? $_POST['tipo']:FALSE;
-			$precio_facturar = isset($_POST['precio_fact']) ? $_POST['precio_fact']:FALSE;
-			$interes = isset($_POST['interes']) ? $_POST['interes']:FALSE;
-			$cuenta_contable = isset($_POST['cuentacontable']) ? $_POST['cuentacontable']:FALSE;
+			
+			
 			
 			if($id && $nombre && $nit){
 				$cliente = new Cliente();
@@ -149,11 +143,7 @@ class ClienteController {
 				$cliente->setDepartamento(strtoupper($departamento));
 				$cliente->setCiudad(strtoupper($ciudad));
 				$cliente->setTelefono($telefono);
-				$cliente->setEmail($email);
-				$cliente->setTipo($tipo);
-				$cliente->setPrecio_facturar($precio_facturar);
-				$cliente->setInteres($interes);				
-				$cliente->setCuenta_contable($cuenta_contable);
+				$cliente->setEmail($email);				
 				$resp = $cliente->Actualizar();
 				
 				if ($resp) {

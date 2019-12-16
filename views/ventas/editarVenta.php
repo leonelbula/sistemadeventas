@@ -17,7 +17,7 @@
 		<div class="box-header with-border">
 		
 			
-			<a href="<?=URL_BASE?>ventas/">
+			<a href="<?=URL_BASE?>ventas/listarventas">
 				<button class="btn btn-success" >
 
 				Cancelar
@@ -62,8 +62,7 @@
 				?>
 				<input type="hidden" class="idVenta" name="idVenta" value="<?=$idventa?>"/>
 				<div class="col-sm-4 invoice-col">					
-					<input type="hidden" class="idclienteventa" value="<?=$row3->id?>"/>
-					<input type="hidden" class="precioCliente" value="<?=$row3->precio_fact?>" />
+					<input type="hidden" class="idclienteventa" value="<?=$row3->id?>"/>					
 					<input type="hidden" class="Cliente" value="<?=$row3->id?>'" />
 				<address>
 					<strong> Cliente </strong><br>
@@ -108,13 +107,12 @@
 		<!-- Table row -->
 		<div class="row">
 			<div class="col-xs-12 table-responsive">
-				<table class="table table-striped">
+				<table class="table dt-responsive table-striped">
 					<thead>
 						<tr>
 							<th>codigo</th>
 							<th>Producto detalle</th>
-							<th>cantidad</th>
-							<th>Unid</th>
+							<th>cantidad</th>						
 							<th>precio</th>							
 							<th>% Descuento</th>
 							<th>% Iva</th>
@@ -133,14 +131,13 @@
 																
 								$productoDetl = InventarioController::VerProdutoId($idProdu);
 								while ($row4 = $productoDetl ->fetch_object()) {									
-									$medida = $row4->medida;
+									
 									$stock = $row4->can_inicial;
 								}
 								echo '<tr>
 										<td class="valorivap">'.$value['codigo'].'<input  class="valoriva" type="hidden" name="valoriva"  value="'.$value['impuesto'].'"/></td>
 										<td class="costop">'.$value['descripcion'].'<input  class="costo" type="hidden" name="costo"  value="'.$value['costo'].'"/></td>							
-										<td class="ingresoCantidad"><input type="number" class="nuevaCantidadProducto" name="nuevaCantidadProducto" stock="'.$stock.'" value="'.$value['cantidad'].'" /></td>
-										<td class="medida">'.$medida.'</td>
+										<td class="ingresoCantidad"><input type="number" class="nuevaCantidadProducto" name="nuevaCantidadProducto" stock="'.$stock.'" value="'.$value['cantidad'].'" /></td>										
 										<td class="precio"><input type="number" class="precioProducto" name="precioProducto" value="'.$value['precio'].'"/></td>							
 										<td class="descuentop"><input type="number" class="descuento" id="descuentoProdu" name="descuento" value="'.$value['descuento'].'"/></td>
 										<td class="ivaProdup">'.$value['impuesto'].'<input type="hidden" class="ivaProdu" id="ivaProdu" name="ivaProdu" value="'.$value['impuesto'].'"/></td>

@@ -19,9 +19,13 @@
   <section class="content">
 
     <div class="box">
+		<?php 
+		foreach ($listaEstado as $key => $value):
+		
+		?>
 
       <div class="box-header with-border">
-		  <a href="<?=URL_BASE?>proveedor/verestadocuentaprov&id=<?=$_GET['id']?>">
+		  <a href="<?=URL_BASE?>proveedor/verestadocuentaprov&id=<?=$value['id_proveedor']?>">
           <button class="btn btn-primary">
 
            Cancelar
@@ -38,7 +42,7 @@
 		  <form action="<?=URL_BASE?>proveedor/guardarabono" method="POST" >
 		<?php   
 		
-			foreach ($listaEstado as $key => $value):
+			
 				
 				$proveedor = ProveedorController::MostrarproveedorId($value['id_proveedor']);
                    foreach ($proveedor as $key => $valueP) {

@@ -160,52 +160,15 @@
           </div>
           <!-- /.box -->
 
-          
-          <!-- /.box -->
-
-        </div>
-        <!-- /.col (left) -->
-        <div class="col-md-6">
-          <div class="box box-primary">
-            <div class="box-header">
-              <h3 class="box-title">Informacion Contable</h3>
-            </div>
-            <div class="box-body">
-              <!-- Date -->
-              <div class="form-group">
-                <label>Tipo de Impuesto:</label>
-
-                <select class="form-control select2" name="impuesto" style="width: 100%;">
-                  <option selected="selected">Seleciones el impueto</option>
-				  <option value="0">No se le Aplica Impuesto</option>
-                  <?php 
-						$impuesto = ImpuestoController::listaImpuesto();
-						while ($rowI = $impuesto->fetch_object()):					
-						
-					?>
-				  <option value="<?=$rowI->porcentaje?>"><?=$rowI->nombre?></option>
-				  <?php endwhile; ?>    
-                </select>
-                <!-- /.input group -->
-              </div>
-			
-              <!-- /.form group -->
-
-              <!-- Date range -->
-           
-			  <button class="btn btn-primary" type="submit">
+          <button class="btn btn-primary" type="submit">
 
             Guardar proveedor
 
           </button>
-			
-            </div>
-            <!-- /.box-body -->
-          </div>
-        
-        
+          <!-- /.box -->
+
         </div>
-        <!-- /.col (right) -->
+        
 		  </form>
       </div>
       <!-- /.row -->

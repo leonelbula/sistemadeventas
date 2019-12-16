@@ -85,7 +85,7 @@
 
   <!-- ChartJS http://www.chartjs.org/-->
   <script src="<?=URL_BASE?>assets/bower_components/Chart.js/Chart.js"></script>
-
+<script src="<?=URL_BASE?>assets/dist/js/demo.js"></script>
     <!-- Select2 
   <link rel="stylesheet" href="<?=URL_BASE?>assets/bower_components/select2/dist/css/select2.min.css">-->
 

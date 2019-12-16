@@ -137,8 +137,7 @@ class Cliente{
 	}
 	public function Guargar() {
 		$sql = "INSERT INTO cliente VALUES (NULL,'{$this->getNombre()}','{$this->getNit()}','{$this->getDireccion()}',"
-			 . " '{$this->getDepartamento()}','{$this->getCiudad()}','{$this->getEmail()}','{$this->getTelefono()}',"
-			 . " '{$this->getTipo()}', {$this->getPrecio_facturar()},{$this->getInteres()},{$this->getCuenta_contable()})";
+			 . " '{$this->getDepartamento()}','{$this->getCiudad()}','{$this->getEmail()}','{$this->getTelefono()}')";
 		$resp = $this->db->query($sql);
 		$resul = FALSE;
 		if($resp){
@@ -148,8 +147,8 @@ class Cliente{
 	}
 	public function Actualizar() {
 		$sql = "UPDATE cliente SET nombre='{$this->getNombre()}',nit='{$this->getNit()}',direccion='{$this->getDireccion()}',"
-		. "departamento='{$this->getDepartamento()}',ciudad='{$this->getCiudad()}',email='{$this->getEmail()}',telefono='{$this->getTelefono()}',"
-		. "tipo='{$this->getTipo()}',precio_fact={$this->getPrecio_facturar()},interes={$this->getInteres()},cuenta_contable={$this->getCuenta_contable()} WHERE id = {$this->getId()}";
+		. "departamento='{$this->getDepartamento()}',ciudad='{$this->getCiudad()}',email='{$this->getEmail()}',telefono='{$this->getTelefono()}'"
+		. " WHERE id = {$this->getId()}";
 		$resp = $this->db->query($sql);
 		$result = FALSE;
 		if($resp){
